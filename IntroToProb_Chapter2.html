@@ -335,11 +335,23 @@
 <ul>
 <li>If probability is a measure of uncertainty, conditional probabilty explitly addresses how new data affects our level of uncertainty.</li>
 </ul>
-<h3 id="rain-example">Rain example:</h3>
+<h4 id="rain-example">Rain example:</h4>
+<p>Let <em>P(R)</em> indicate the probability of rain before looking outside. If after looking outside we see ominous clouds, we might adjust our expectation of rain, given how cloudy it is.</p>
 <ul>
-<li><p>Let <em>P(R)</em> indicates the probability of rain before looking outside. If after looking outside we see ominous clouds, we might adjust our expectation of rain, given how cloudy it is.</p></li>
-<li><p>We can denote this new probability as <em>P(R|C)</em>, or the probability of <em>R</em> (rain) given <em>C</em> (clouds). This is called “conditioning on C.”</p></li>
+<li>We can denote this new probability as <em>P(R C)</em>, or the probability of <em>R</em> (rain) given <em>C</em> (clouds). This is called “conditioning on C.”</li>
 </ul>
+</section>
+<section id="conditioning-is-the-soul-of-statistics." class="slide level2">
+<h2><em>“Conditioning is the soul of statistics.”</em></h2>
+<p><br></p>
+<p><strong>Conditional Probability, formal definition:</strong><br>
+If <em>A</em> and <em>B</em> are events with <em>P(B) &gt; 0</em>, then the <em>conditional probability</em> of <em>A</em> given <em>B</em>, denoted by <em>P(A|B)</em>, is defined as:</p>
+<p><br></p>
+<center>
+<span class="math inline">\(\displaystyle P(A \mid B) = \frac{P(A \cap B)}{P(B)}\)</span>
+</center>
+<p><br></p>
+<p>We call <span class="math inline">\(P(A)\)</span> the <em>prior</em> probability of <em>A</em> and <span class="math inline">\(P (A \mid B)\)</span> the <em>posterior</em> probability of <em>A</em>.</p>
 <div class="footer footer-default">
 
 </div>

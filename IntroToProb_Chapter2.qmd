@@ -9,9 +9,25 @@ editor: visual
 
 -   If probability is a measure of uncertainty, conditional probabilty explitly addresses how new data affects our level of uncertainty.
 
-### Rain example:
-- Let *P(R)* indicates the probability of rain before looking outside. If after looking outside we see ominous clouds, we might adjust our expectation of rain, given how cloudy it is. 
+#### Rain example:
+Let *P(R)* indicate the probability of rain before looking outside. If after looking outside we see ominous clouds, we might adjust our expectation of rain, given how cloudy it is. 
 
-- We can denote this new probability as *P(R|C)*, or the probability of *R* (rain) given *C* (clouds). This is called "conditioning on C." 
+- We can denote this new probability as *P(R \mid C)*, or the probability of *R* (rain) given *C* (clouds). This is called "conditioning on C." 
 
-## 
+
+## *"Conditioning is the soul of statistics."*
+
+<br>
+
+__Conditional Probability, formal definition:__  
+If *A* and *B* are events with *P(B) > 0*, then the *conditional probability* of *A* given *B*, denoted by *P(A|B)*, is defined as:
+
+<br>
+
+<center>
+$\displaystyle P(A \mid B) = \frac{P(A \cap B)}{P(B)}$
+</center>
+
+<br>
+
+We call $P(A)$ the *prior* probability of *A* and $P (A \mid B)$ the *posterior* probability of *A*. 
