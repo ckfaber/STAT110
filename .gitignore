@@ -1,2 +1,20 @@
 
 *.js
+
+*.css
+
+*.map
+
+*.eot
+
+*.ttf
+
+*.woff
+
+IntroToProb_Chapter2_files/libs/revealjs/dist/theme/fonts/league-gothic/LICENSE
+
+IntroToProb_Chapter2_files/libs/revealjs/dist/theme/fonts/source-sans-pro/LICENSE
+
+IntroToProb_Chapter2_files/libs/revealjs/plugin/notes/speaker-view.html
+
+*.yml
