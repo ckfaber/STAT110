@@ -1,0 +1,17 @@
+---
+title: "Introduction to Conditional Probability"
+subtitle: "Chapter 2, Introduction to Probability"
+format: revealjs
+editor: visual
+---
+
+## What is Conditional Probability?
+
+-   If probability is a measure of uncertainty, conditional probabilty explitly addresses how new data affects our level of uncertainty.
+
+### Rain example:
+- Let *P(R)* indicates the probability of rain before looking outside. If after looking outside we see ominous clouds, we might adjust our expectation of rain, given how cloudy it is. 
+
+- We can denote this new probability as *P(R|C)*, or the probability of *R* (rain) given *C* (clouds). This is called "conditioning on C." 
+
+## 
