@@ -18,3 +18,4 @@ IntroToProb_Chapter2_files/libs/revealjs/dist/theme/fonts/source-sans-pro/LICENS
 IntroToProb_Chapter2_files/libs/revealjs/plugin/notes/speaker-view.html
 
 *.yml
+.Rproj.user
