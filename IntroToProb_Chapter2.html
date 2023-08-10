@@ -6,7 +6,7 @@
 <script src="IntroToProb_Chapter2_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="IntroToProb_Chapter2_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="IntroToProb_Chapter2_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="IntroToProb_Chapter2_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="IntroToProb_Chapter2_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.2.269">
 
   <title>Introduction to Conditional Probability</title>
@@ -241,6 +241,7 @@
     }
     .reveal .slide:not(.center) {
       height: 100%;
+      overflow-y: auto;
     }
     .reveal .slide.scrollable {
       overflow-y: auto;
@@ -318,7 +319,7 @@
     }
   </style>
 </head>
-<body class="quarto-light">
+<body class="quarto-dark">
   <div class="reveal">
     <div class="slides">
 
@@ -335,10 +336,11 @@
 <ul>
 <li>If probability is a measure of uncertainty, conditional probabilty explitly addresses how new data affects our level of uncertainty.</li>
 </ul>
+<p><br></p>
 <h4 id="rain-example">Rain example:</h4>
 <p>Let <em>P(R)</em> indicate the probability of rain before looking outside. If after looking outside we see ominous clouds, we might adjust our expectation of rain, given how cloudy it is.</p>
 <ul>
-<li>We can denote this new probability as <em>P(R C)</em>, or the probability of <em>R</em> (rain) given <em>C</em> (clouds). This is called “conditioning on C.”</li>
+<li>We can denote this new probability as <em>P(R</em> C), or the probability of <em>R</em> (rain) given <em>C</em> (clouds). This is called “conditioning on C.”</li>
 </ul>
 </section>
 <section id="conditioning-is-the-soul-of-statistics." class="slide level2">
@@ -380,8 +382,8 @@ If <em>A</em> and <em>B</em> are events with <em>P(B) &gt; 0</em>, then the <em>
       // Full list of configuration options available at:
       // https://revealjs.com/config/
       Reveal.initialize({
-'controlsAuto': true,
-'previewLinksAuto': false,
+'controlsAuto': false,
+'previewLinksAuto': true,
 'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
@@ -391,7 +393,7 @@ If <em>A</em> and <em>B</em> are events with <em>P(B) &gt; 0</em>, then the <em>
 'smaller': false,
  
         // Display controls in the bottom right corner
-        controls: false,
+        controls: true,
 
         // Help the user learn the controls by providing hints, for example by
         // bouncing the down arrow when they first encounter a vertical slide
@@ -408,7 +410,7 @@ If <em>A</em> and <em>B</em> are events with <em>P(B) &gt; 0</em>, then the <em>
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
@@ -498,7 +500,7 @@ If <em>A</em> and <em>B</em> are events with <em>P(B) &gt; 0</em>, then the <em>
         defaultTiming: null,
 
         // Enable slide navigation via mouse wheel
-        mouseWheel: false,
+        mouseWheel: true,
 
         // The display mode that will be used to show slides
         display: 'block',

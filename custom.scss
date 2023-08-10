@@ -1,0 +1,69 @@
+/*-- scss:defaults --*/
+
+@import url(https://fonts.googleapis.com/css?family=Montserrat:600,600i&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Josefin+Sans:300&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Fira+Mono&display=swap);
+
+// headings
+$presentation-heading-font: 'Josefin Sans', sans-serif !default;
+$presentation-font-size-root: 1.75rem !default;
+
+$presentation-h1-font-size: 5.75rem !default;
+$presentation-h2-font-size: 2.75rem !default;
+$presentation-h3-font-size: 2rem !default;
+
+
+//code
+$font-family-monospace: 'Fira Mono', monospace  !default;
+
+/*-- scss:rules --*/
+
+// https://stackoverflow.com/questions/75471614/how-to-make-code-chunk-output-scrollable-horizontally-in-quarto-revealjs-present
+
+// To make code chunk scroll horizontally
+.hscroll {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.reveal .footer > * {
+  font-size: 0.8rem;
+}
+
+#title-slide {
+  text-align: left;
+
+  .subtitle,
+  .institute,
+  .quarto-title-affiliation,
+  .quarto-title-author-email {
+    font-style: italic;
+    color: #7F7F7F;
+  }
+
+  .author, .quarto-title-author-name {
+    color: $body-color;
+  }
+
+  .quarto-title-authors {
+    display: flex;
+    justify-content: left;
+
+    .quarto-title-author {
+      padding-left: 0em;
+      padding-right: 0em;
+      width: 100%;
+    }
+  }
+
+  p.author::before, div.quarto-title-author::before {
+    content: "";
+    display: block;
+    border: none;
+    background-color: $body-color;
+    color: $body-color;
+    height: 3px;
+    margin-bottom: 1em;
+  }
+
+}

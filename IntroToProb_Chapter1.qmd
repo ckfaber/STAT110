@@ -1,0 +1,7 @@
+---
+title: "Probability and Counting"
+format: revealjs
+editor: visual
+---
+
+## 
