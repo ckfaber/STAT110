@@ -1,7 +1,128 @@
 ---
 title: "Probability and Counting"
-format: revealjs
+subtitle: "Chapter 1, Introduction to Probability"
+format:
+  revealjs:
+    theme: [dark, custom.scss]
+    self-contained: false
+    controls: true
+    slide-number: true
+    scrollable: true
+    mouse-wheel: true
+    preview-links: auto
 editor: visual
 ---
 
-## 
+## Counting Review
+
+<br>
+
+[Sampling Table]{style="color: orange;"}
+
+![](SamplingTable.png){width="300"}
+
+<br>
+
+The [above formulae](https://youtu.be/KbB0FjPg0mw?t=2525) can be used to estimate the number of possible outcomes or permutations depending on the experimental conditions.
+
+<br>
+
+[**Unordered with replacement is a special case that often violates the naive assumption of probability. Use with caution.**]{style="color: orange;"}
+
+## Combinatorics Review: n Choose k
+
+[**The Binomial Coefficient**]{style="color: orange;"} counts the number of ways to choose $k$ objects from $n$, without replacement, where order does not matter:
+
+<br>
+
+$$\displaystyle C(n,k) =  {}_{n}C_k = \binom{n}{k} = \frac{n!}{(n-k)!k!} = \frac{n(n-1)...(n-k+1)}{k!}$$
+
+<br>
+
+[*Remember, this calculation assumes that **order matters**, and that each object* $k$ is unique.]{style="color: orange;"}
+
+## Some identities of note:
+
+1)  $$\binom{n}{k} = \binom{n}{n-k}$$
+
+<br>
+
+2)  $$n\binom{n-1}{k-1} = k\binom{n}{k} $$
+
+<br>
+
+3)  [Vandermonde identity](https://youtu.be/FJd_1H3rZGg?t=2300): $$\binom{m+n}{k} = \displaystyle \sum_{j=0}^{k}\binom{m}{j}\binom{n}{k-j}$$
+
+
+## Combinatorics Example: What is the probability that the total after rolling 4 fair dice is 21?
+
+::: {.incremental}
+- [To get a 21, the outcome must be a permutation of $(6,6,6,3)$, $(6,6,5,4)$, or $(6,5,5,5)$. How many possible arrangements exist that achieve each of these combinations?]{style="color: orange;"}
+
+  +   For $(6,6,6,3)$, we have $n=4$ dice and we are essentially just choosing which $k=1$ to be equal to $3$. Thus, ${}_{4}C_1 = \frac{4!}{(4-1)!1!} = \frac{4*3!}{3!} = 4$
+
+  +   For $(6,6,5,4)$, we are choosing which $k=2$ dice to be some combination of $5$ and $4$. ${}_{4}C_2 = \frac{4!}{(4-2)!1!} = \frac{4*3*2!}{2!} = 12$
+
+  +   For $(6,5,5,5)$, we are choosing which $k=1$ die to be equal to $6$. ${}_{4}C_1 = \frac{4!}{(4-1)!1!} = \frac{4*3!}{3!} = 4$
+
+- Therefore, there are a total of $\binom{4}{1} + \binom{4}{1} + \binom{4}{2} = 4 + 4 + 12 = 20$ favorable outcomes from a total of $n^k=6^4=1256$. $P(21) = 20/1256 = 0.015$
+:::
+
+## The Birthday Problem
+[What is the probability of at least 2 people in a group of *k* people having the same birthday?]{style="color: orange;"}
+
+To answer this question, we can first approach the logic by answering some easier and more intuitive questions.  
+
+::: {.incremental}
+- [What is the probability of a shared birthday if $k = 366$?]{style="color: orange;"}
+  + $P = 1$! Each person must be assigned to one of the $n = 365$ possible days of the year.
+- [What is the probability that random person A has the same birthday as random person B?]{style="color: orange;"}
+  +  $\frac{1}{365} = 0.0027$
+- [What is the probability that person A has a *different* birthday than person B?]{style="color: orange;"}
+  + $\frac{1}{365} = \frac{364}{365} = 0.9973$
+  + Note that this is the complement of two random people sharing the same birthday. Therefore, this formula $1 - \frac{364}{365} = \frac{1}{365} = 0.0027$ can be used to calculate the probability of a shared birthday. 
+:::
+
+## How can we scale this logic to a group of *k*? 
+::: {.incremental}
+- [First, let's say $n = 3$. What is the probability of a shared birthday among 3 people?]{style="color: orange;"}
+  + The complement of not sharing a birthday is the probability of a shared birthday. Therefore, this can be computed as: 
+  $$P(3) = 1 - (\frac{364}{365})(\frac{363}{365}) = 0.008$$
+  + This formula looks familiar... We have $n = 365$ possibilities for each *k* person, and we are calculating the probability of *not* sharing a birthday, as if we can pluck one date from the $n = 365$ and set it aside. [This is sampling without replacement.]{style="color: orange;"}
+  
+  + $365(365-1)(365-2)...(365-k+1)$ gives the number of ways to assign birthdays to *k* people for $ k \le 365$
+  + To compute the probability, simply divide the above by the number of total possible outcomes, given by $365^k$, and subtract it from 1. $$ P(k) = 1 - \frac{365*364*363...*(365-k+1)}{365^k}$$
+  
+::: 
+  
+## Newton-Pepys problem
+  
+[Which of the following has the highest probability?]{style="color: orange;"}  
+1. at least one 6 appears when 6 fair dice are rolled  
+2. at least two 6's appear when 12 fair dice are rolled  
+3. at least three 6's appear when 18 fair dice are rolled  
+
+In the first scenario, we have $6^6$ total possible outcomes. We are interested in the subset E containing every event (each with probability $\frac{1}{6^6}$), where at least one die is a 6. 
+
+::: {.incremental}
+- This is hard to count, so we can instead compute $P(E) = 1 - E^c$. $E^c$ is where we do not get a single 6 on any of the $D_{n}$ dice. 
+  + From the multiplication rule, we multiply the probabilities of each die *not* being a 6 together: $$P(E^c) = P(D_{1\neq6})*P(D_{2\neq6})*...P(D_{6\neq6}) = (\frac{5}{6})^6$$
+  + Therefore, $$P(E) = 1 - (\frac{5}{6})^6 = 0.665$$ 
+:::
+
+## Alternate solution:
+[Alternatively, we can think of this via a combinatorics approach as described in the text, where each die can take on 5 possible values (anything but 6).]{style="color: orange;"}   
+
+- $E^c$ therefore has favorable outcomes of $5^6$. The probability is then given by dividing by the total number of possible outcomes, $6^6$. Therefore, $$P(E) = 1 - (\frac{5^6}{6^6}) = 0.665$$
+
+[For 12 dice, we have to add the probability of choosing just one 6 from 12:]{style="color: orange;"}  
+$$P(E) = 1 - \frac{5^{12} + \binom{12}{1}5^{11}}{6^{12}} = 0.62$$  
+
+[For 18 dice, we have to add the probability of choosing just one 6 and just two 6's from 18:]{style="color: orange;"}  
+$$P(E) = 1 - \frac{5^{18} + \binom{18}{1}5^{17} + \binom{18}{2}5^{16}}{6^{18}} = 0.60$$
+## de Montmorte's matching problem
+
+
+
+  
+  

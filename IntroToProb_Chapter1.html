@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="IntroToProb_Chapter2_files/libs/clipboard/clipboard.min.js"></script>
-<script src="IntroToProb_Chapter2_files/libs/quarto-html/tabby.min.js"></script>
-<script src="IntroToProb_Chapter2_files/libs/quarto-html/popper.min.js"></script>
-<script src="IntroToProb_Chapter2_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="IntroToProb_Chapter2_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="IntroToProb_Chapter2_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="IntroToProb_Chapter2_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="IntroToProb_Chapter1_files/libs/clipboard/clipboard.min.js"></script>
+<script src="IntroToProb_Chapter1_files/libs/quarto-html/tabby.min.js"></script>
+<script src="IntroToProb_Chapter1_files/libs/quarto-html/popper.min.js"></script>
+<script src="IntroToProb_Chapter1_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="IntroToProb_Chapter1_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="IntroToProb_Chapter1_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="IntroToProb_Chapter1_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.2.269">
 
-  <title>Introduction to Conditional Probability</title>
+  <title>Probability and Counting</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="IntroToProb_Chapter2_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="IntroToProb_Chapter2_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="IntroToProb_Chapter1_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="IntroToProb_Chapter1_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -28,11 +28,11 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="IntroToProb_Chapter2_files/libs/revealjs/dist/theme/quarto.css" id="theme">
-  <link href="IntroToProb_Chapter2_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="IntroToProb_Chapter2_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="IntroToProb_Chapter2_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="IntroToProb_Chapter2_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="IntroToProb_Chapter1_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <link href="IntroToProb_Chapter1_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="IntroToProb_Chapter1_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="IntroToProb_Chapter1_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="IntroToProb_Chapter1_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -324,160 +324,143 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Introduction to Conditional Probability</h1>
-  <p class="subtitle">Chapter 2, Introduction to Probability</p>
+  <h1 class="title">Probability and Counting</h1>
+  <p class="subtitle">Chapter 1, Introduction to Probability</p>
 
 <div class="quarto-title-authors">
 </div>
 
 </section>
-<section>
-<section id="recap" class="title-slide slide level1 center">
-<h1>Recap</h1>
-
-</section>
-<section id="inclusion-exclusion-and-de-montmorts-problem" class="slide level2">
-<h2>Inclusion-Exclusion and de Montmort’s Problem</h2>
-
-<img data-src="VennDiagram.svg" class="r-stretch quarto-figure-center"><p><span class="math display">\[P(A \cup B) = P(A) + P(B) - P(A \cap B)\]</span> To get the probability of the union of two event spaces, you add up the individual probabilities (<em>inclusion</em>) then subtract the overlapping spaces that have been double-counted (<em>exclusions</em>).</p>
-</section>
-<section id="what-if-you-have-ge-3-subsets-for-n3" class="slide level2">
-<h2>What if you have <span class="math inline">\(\ge 3\)</span> subsets? For <span class="math inline">\(n=3\)</span>:</h2>
+<section id="counting-review" class="slide level2">
+<h2>Counting Review</h2>
 <p><br></p>
-<p><span class="math display">\[\begin{align*}
-P(A \cup B \cup C) &amp;= P(A) + P(B) + P(C)...\\ &amp;- P(A \cap B) - P(B \cap C) - P(A \cap C)...\\ &amp;+ P(A \cap B \cap C)
-\end{align*}\]</span></p>
-<p>For <span class="math inline">\(n\)</span> subsets, the pattern becomes a bit more complicated, but is given by the following formula:</p>
-<p><span class="math display">\[\begin{align*}
-P\left(\bigcup_{i=1}^{n}A_{i}\right) = \sum_{i}P(A_{i}) - \sum_{i&lt;j}P(A_{i} \cap A_{j}) + \sum_{i&lt;j&lt;k}P(A_{i} \cap A_{j} \cap A_{k}) - ...\\
-+ (-1)^{n+1}P(A_{1} \cap ... \cap A_{n})
-\end{align*}\]</span></p>
-</section>
-<section id="de-montmorts-matching-problem" class="slide level2">
-<h2><span style="color: orange;">de Montmort’s matching problem:</span></h2>
-<p>Consider a well-shuffled deck of <em>n</em> cards labeled 1 through <em>n</em>. If you flip the cards over, one at a time, while saying the flip count 1 through <em>n</em> as you do. What is the probability that you get at least one match between the number you say aloud and the card number (e.g., the 3rd card is a 3)?</p>
+<p><span style="color: orange;">Sampling Table</span></p>
+
+<img data-src="SamplingTable.png" width="300" class="r-stretch"><p><br></p>
+<p>The <a href="https://youtu.be/KbB0FjPg0mw?t=2525">above formulae</a> can be used to estimate the number of possible outcomes or permutations depending on the experimental conditions.</p>
 <p><br></p>
-<p><span style="color: orange;">What type of sampling problem is this?</span><br>
-</p>
+<p><span style="color: orange;"><strong>Unordered with replacement is a special case that often violates the naive assumption of probability. Use with caution.</strong></span></p>
+</section>
+<section id="combinatorics-review-n-choose-k" class="slide level2">
+<h2>Combinatorics Review: n Choose k</h2>
+<p><span style="color: orange;"><strong>The Binomial Coefficient</strong></span> counts the number of ways to choose <span class="math inline">\(k\)</span> objects from <span class="math inline">\(n\)</span>, without replacement, where order does not matter:</p>
+<p><br></p>
+<p><span class="math display">\[\displaystyle C(n,k) =  {}_{n}C_k = \binom{n}{k} = \frac{n!}{(n-k)!k!} = \frac{n(n-1)...(n-k+1)}{k!}\]</span></p>
+<p><br></p>
+<p><span style="color: orange;"><em>Remember, this calculation assumes that <strong>order matters</strong>, and that each object</em> <span class="math inline">\(k\)</span> is unique.</span></p>
+</section>
+<section id="some-identities-of-note" class="slide level2">
+<h2>Some identities of note:</h2>
+<ol type="1">
+<li><span class="math display">\[\binom{n}{k} = \binom{n}{n-k}\]</span></li>
+</ol>
+<p><br></p>
+<ol start="2" type="1">
+<li><span class="math display">\[n\binom{n-1}{k-1} = k\binom{n}{k} \]</span></li>
+</ol>
+<p><br></p>
+<ol start="3" type="1">
+<li><a href="https://youtu.be/FJd_1H3rZGg?t=2300">Vandermonde identity</a>: <span class="math display">\[\binom{m+n}{k} = \displaystyle \sum_{j=0}^{k}\binom{m}{j}\binom{n}{k-j}\]</span></li>
+</ol>
+</section>
+<section id="combinatorics-example-what-is-the-probability-that-the-total-after-rolling-4-fair-dice-is-21" class="slide level2">
+<h2>Combinatorics Example: What is the probability that the total after rolling 4 fair dice is 21?</h2>
 <div>
 <ul>
-<li class="fragment">Does the order matter?</li>
-<li class="fragment">YES, that’s kinda the point of this problem :) So, we’re looking at a <em>permutation</em></li>
-<li class="fragment">Are we replacing cards as we flip?</li>
-<li class="fragment">NO.</li>
+<li class="fragment"><p><span style="color: orange;">To get a 21, the outcome must be a permutation of <span class="math inline">\((6,6,6,3)\)</span>, <span class="math inline">\((6,6,5,4)\)</span>, or <span class="math inline">\((6,5,5,5)\)</span>. How many possible arrangements exist that achieve each of these combinations?</span></p>
+<ul>
+<li class="fragment"><p>For <span class="math inline">\((6,6,6,3)\)</span>, we have <span class="math inline">\(n=4\)</span> dice and we are essentially just choosing which <span class="math inline">\(k=1\)</span> to be equal to <span class="math inline">\(3\)</span>. Thus, <span class="math inline">\({}_{4}C_1 = \frac{4!}{(4-1)!1!} = \frac{4*3!}{3!} = 4\)</span></p></li>
+<li class="fragment"><p>For <span class="math inline">\((6,6,5,4)\)</span>, we are choosing which <span class="math inline">\(k=2\)</span> dice to be some combination of <span class="math inline">\(5\)</span> and <span class="math inline">\(4\)</span>. <span class="math inline">\({}_{4}C_2 = \frac{4!}{(4-2)!1!} = \frac{4*3*2!}{2!} = 12\)</span></p></li>
+<li class="fragment"><p>For <span class="math inline">\((6,5,5,5)\)</span>, we are choosing which <span class="math inline">\(k=1\)</span> die to be equal to <span class="math inline">\(6\)</span>. <span class="math inline">\({}_{4}C_1 = \frac{4!}{(4-1)!1!} = \frac{4*3!}{3!} = 4\)</span></p></li>
+</ul></li>
+<li class="fragment"><p>Therefore, there are a total of <span class="math inline">\(\binom{4}{1} + \binom{4}{1} + \binom{4}{2} = 4 + 4 + 12 = 20\)</span> favorable outcomes from a total of <span class="math inline">\(n^k=6^4=1256\)</span>. <span class="math inline">\(P(21) = 20/1256 = 0.015\)</span></p></li>
 </ul>
-<p>This is a <strong>permutation without replacement</strong> problem. The total number of possible permutations is therefore given by <span class="math display">\[n!\]</span></p>
 </div>
 </section>
-<section id="solving-de-montmorts-problem" class="slide level2">
-<h2>Solving de Montmort’s problem</h2>
-<p><span style="color: orange;">For any <em>ith</em> card, what is the probability of a match?</span><br>
-Let <span class="math inline">\(A_{i}\)</span> be the event of a match. For a fair deck, <span class="math display">\[P(A_{i}) = \frac{1}{n}\]</span> <span style="color: orange;">What is the probability of two matches?</span><br>
-Imagine there are only a total of <span class="math inline">\(n=5\)</span> cards. Pick two randomly to match the number that is spoken aloud - for example, say 2 and 4 are in the “correct” position. That means that cards 1, 3, and 5 have <span class="math inline">\((n-2)\)</span>, <span class="math inline">\((n-3)\)</span>, and <span class="math inline">\((n-4)\)</span> possible values, out of a total possible number of <span class="math inline">\(n!\)</span>. In other words…</p>
-<p><span class="math display">\[\begin{align*}
-P(A_{i} \cap A_{j}) &amp;= \binom{n}{2} \left(\frac{(n-2)!}{n!}\right)\\
-&amp;= \left(\frac{n!}{(n-2)!2!}\right)\left(\frac{1}{n(n-1)}\right)\\
-&amp;= \left(\frac{n(n-1)(n-2)!}{(n-2)!2!}\right)\left(\frac{1}{n(n-1)}\right)\\
-&amp;= \frac{1}{2!}
-\end{align*}\]</span></p>
-</section>
-<section id="solving-de-montmorts-problem-continued" class="slide level2">
-<h2>Solving de Montmort’s problem, continued</h2>
-<p><span style="color: orange;">What is the probability of three matches, then???</span><br>
-</p>
-<p>Well, in our 5-card example, now we are choosing 3 cards to be matches, and the remaining <span class="math inline">\((n-3)\)</span> and <span class="math inline">\((n-4)\)</span> can be anything that remains.</p>
-<p><span class="math display">\[\begin{align*}
-P(A_{i} \cap A_{j} \cap A_{k}) &amp;= \binom{n}{3}\left(\frac{(n-3)!}{n!}\right)\\
-&amp;= \left(\frac{n!}{(n-3)!3!}\right)\left(\frac{1}{(n-1)(n-2)}\right)\\
-&amp;= \frac{1}{3!}
-\end{align*}\]</span></p>
-<p>As n increases, we can recognize the pattern emerging, that looks a heck of a lot like the Taylor series for <span class="math inline">\(1/e\)</span>:</p>
-<p><span class="math display">\[ P\left(\bigcup_{i=1}^{n}A_{i}\right) = 1 - \frac{1}{2!} + \frac{1}{3!}-...+ (-1)^{n+1}*\frac{1}{n!}\]</span></p>
-</section></section>
-<section>
-<section id="conditional-probability" class="title-slide slide level1 center">
-<h1>Conditional Probability</h1>
-
-</section>
-<section id="what-is-conditional-probability" class="slide level2">
-<h2>What is Conditional Probability?</h2>
+<section id="the-birthday-problem" class="slide level2">
+<h2>The Birthday Problem</h2>
+<p><span style="color: orange;">What is the probability of at least 2 people in a group of <em>k</em> people having the same birthday?</span></p>
+<p>To answer this question, we can first approach the logic by answering some easier and more intuitive questions.</p>
+<div>
 <ul>
-<li>If probability is a measure of uncertainty, conditional probability explicitly addresses how new data affects our level of uncertainty.</li>
-</ul>
-<p><br></p>
-<h4 id="rain-example">Rain example:</h4>
-<p>Let <em>P(R)</em> indicate the probability of rain before looking outside. If after looking outside we see ominous clouds, we might adjust our expectation of rain, given how cloudy it is.</p>
+<li class="fragment"><span style="color: orange;">What is the probability of a shared birthday if <span class="math inline">\(k = 366\)</span>?</span>
 <ul>
-<li>We can denote this new probability as <em>P(R</em> C), or the probability of <em>R</em> (rain) given <em>C</em> (clouds). This is called “conditioning on C.”</li>
+<li class="fragment"><span class="math inline">\(P = 1\)</span>! Each person must be assigned to one of the <span class="math inline">\(n = 365\)</span> possible days of the year.</li>
+</ul></li>
+<li class="fragment"><span style="color: orange;">What is the probability that random person A has the same birthday as random person B?</span>
+<ul>
+<li class="fragment"><span class="math inline">\(\frac{1}{365} = 0.0027\)</span></li>
+</ul></li>
+<li class="fragment"><span style="color: orange;">What is the probability that person A has a <em>different</em> birthday than person B?</span>
+<ul>
+<li class="fragment"><span class="math inline">\(\frac{1}{365} = \frac{364}{365} = 0.9973\)</span></li>
+<li class="fragment">Note that this is the complement of two random people sharing the same birthday. Therefore, this formula <span class="math inline">\(1 - \frac{364}{365} = \frac{1}{365} = 0.0027\)</span> can be used to calculate the probability of a shared birthday.</li>
+</ul></li>
 </ul>
+</div>
 </section>
-<section id="conditioning-is-the-soul-of-statistics." class="slide level2">
-<h2>“Conditioning is the soul of statistics.”</h2>
-<p><br></p>
-<p><span style="color: orange;"><strong>Conditional Probability:</strong></span><br>
-If <em>A</em> and <em>B</em> are events with <em>P(B) &gt; 0</em>, then the <em>conditional probability</em> of <em>A</em> given <em>B</em>, denoted by <em>P(A|B)</em>, is defined as:</p>
-<p><br></p>
-<p><span class="math display">\[\displaystyle P(A|B) = \frac{P(A \cap B)}{P(B)}\]</span> <br></p>
-<p><span class="math display">\[\displaystyle P(B|A) = \frac{P(B \cap A)}{P(A)}\]</span></p>
-<p><br></p>
-<p><span style="color: orange;">Note that <span class="math inline">\(P(A|B) \neq P(B|A)\)</span>.</span><br>
-</p>
+<section id="how-can-we-scale-this-logic-to-a-group-of-k" class="slide level2">
+<h2>How can we scale this logic to a group of <em>k</em>?</h2>
+<div>
+<ul>
+<li class="fragment"><span style="color: orange;">First, let’s say <span class="math inline">\(n = 3\)</span>. What is the probability of a shared birthday among 3 people?</span>
+<ul>
+<li class="fragment"><p>The complement of not sharing a birthday is the probability of a shared birthday. Therefore, this can be computed as: <span class="math display">\[P(3) = 1 - (\frac{364}{365})(\frac{363}{365}) = 0.008\]</span></p></li>
+<li class="fragment"><p>This formula looks familiar… We have <span class="math inline">\(n = 365\)</span> possibilities for each <em>k</em> person, and we are calculating the probability of <em>not</em> sharing a birthday, as if we can pluck one date from the <span class="math inline">\(n = 365\)</span> and set it aside. <span style="color: orange;">This is sampling without replacement.</span></p></li>
+<li class="fragment"><p><span class="math inline">\(365(365-1)(365-2)...(365-k+1)\)</span> gives the number of ways to assign birthdays to <em>k</em> people for $ k $</p></li>
+<li class="fragment"><p>To compute the probability, simply divide the above by the number of total possible outcomes, given by <span class="math inline">\(365^k\)</span>, and subtract it from 1. <span class="math display">\[ P(k) = 1 - \frac{365*364*363...*(365-k+1)}{365^k}\]</span></p></li>
+</ul></li>
+</ul>
+</div>
 </section>
-<section id="pab-neq-pba" class="slide level2">
-<h2><span class="math inline">\(P(A|B) \neq P(B|A)\)</span></h2>
-<p><span style="color: orange;"><strong>Example 2.2.2 (pg. 46)</strong></span><br>
-Two cards are drawn from a standard deck of cards, one at a time without replacement. Let <span class="math inline">\(A\)</span> be the event that the first card is a heart, and <span class="math inline">\(B\)</span> be the event that the second card is red. Find <span class="math inline">\(P(A|B)\)</span> and <span class="math inline">\(P(B|A)\)</span>.</p>
-<p>Because all 4 suits are equally likely, <span class="math inline">\(P(A) = \frac{1}{4}\)</span></p>
-<p>After a heart is selected, 51 cards remain, of which 25 are red. Therefore, <span class="math inline">\(P(B) = \frac{25}{51}\)</span></p>
-<p>Therefore, <span class="math display">\[P(A \cap B) = \frac{1*25}{4*51} = \frac{25}{204}\]</span></p>
-<p>To find the probability that the second card is red, event <span class="math inline">\(B\)</span>, we first recognize that the first card could be anything, and <em>without knowing in advance the value of the first card</em>, we conclude that the second hard has a 50/50 chance of being red or black. So <span class="math display">\[P(B) = \frac{1}{2}\]</span>.</p>
+<section id="newton-pepys-problem" class="slide level2">
+<h2>Newton-Pepys problem</h2>
+<p><span style="color: orange;">Which of the following has the highest probability?</span><br>
+1. at least one 6 appears when 6 fair dice are rolled<br>
+2. at least two 6’s appear when 12 fair dice are rolled<br>
+3. at least three 6’s appear when 18 fair dice are rolled</p>
+<p>In the first scenario, we have <span class="math inline">\(6^6\)</span> total possible outcomes. We are interested in the subset E containing every event (each with probability <span class="math inline">\(\frac{1}{6^6}\)</span>), where at least one die is a 6.</p>
+<div>
+<ul>
+<li class="fragment">This is hard to count, so we can instead compute <span class="math inline">\(P(E) = 1 - E^c\)</span>. <span class="math inline">\(E^c\)</span> is where we do not get a single 6 on any of the <span class="math inline">\(D_{n}\)</span> dice.
+<ul>
+<li class="fragment">From the multiplication rule, we multiply the probabilities of each die <em>not</em> being a 6 together: <span class="math display">\[P(E^c) = P(D_{1\neq6})*P(D_{2\neq6})*...P(D_{6\neq6}) = (\frac{5}{6})^6\]</span></li>
+<li class="fragment">Therefore, <span class="math display">\[P(E) = 1 - (\frac{5}{6})^6 = 0.665\]</span></li>
+</ul></li>
+</ul>
+</div>
 </section>
-<section id="so-what-is-pab-and-pba" class="slide level2">
-<h2>So what is <span class="math inline">\(P(A|B)\)</span> and <span class="math inline">\(P(B|A)\)</span>?</h2>
-<p><br></p>
-<p><span class="math display">\[P(A|B) = \frac{P(A \cap B)}{P(B)} = \frac{25/204}{1/2} = \frac{25}{102}\]</span> <br></p>
-<p><span class="math display">\[P(B|A) = \frac{P(B \cap A)}{P(A)} = \frac{25/204}{1/4} = \frac{25}{51}\]</span> <br></p>
-</section>
-<section id="intuition-of-conditional-probability" class="slide level2">
-<h2>Intuition of Conditional Probability</h2>
-<p><br></p>
-
-<img data-src="ConditionalProbability_PebbleWorld.jpg" class="r-stretch quarto-figure-center"></section>
-<section id="theorems-of-conditional-probability" class="slide level2">
-<h2>Theorems of Conditional Probability</h2>
-<p><span style="color: orange;">1. <span class="math inline">\(P(A \cap B) = P(A|B)*P(B) = P(B|A)*P(A)\)</span></span><br>
-If A and B are independent, <span class="math inline">\(P(A|B) = P(A)\)</span> because conditioning on <span class="math inline">\(B\)</span> does nothing - <span class="math inline">\(B\)</span> has no effect on <span class="math inline">\(P(A)\)</span>.</p>
-<p><span style="color: orange;">2. Bayes’ rule:</span> <span class="math display">\[P(A|B) = \frac{P(B|A)P(A)}{P(B)}\]</span></p>
-<p><br></p>
-<p>This is often rewritten in terms of <em>odds</em>, as given by: <span class="math display">\[P(A) = \frac{odds(A)}{1 + odds(A)}\]</span></p>
-</section>
-<section id="law-of-total-probability" class="slide level2">
-<h2>Law of Total Probability</h2>
-<p><span style="color: orange;">Let <span class="math inline">\(A_{1},...A_{n}\)</span> be a partition sample space <em>S</em>, where each <span class="math inline">\(A_{i}\)</span> are disjoint such that their union is <em>S</em>.</span><br>
-</p>
-<p><span class="math display">\[P(B) = \sum_{i=1}^{n}P(B|A_{i})P(A_{i})\]</span> <br></p>
-
-<img data-src="LawofTotalProb.jpg" class="r-stretch quarto-figure-center"><div class="footer footer-default">
+<section id="alternate-solution" class="slide level2">
+<h2>Alternate solution:</h2>
+<p><span style="color: orange;">Alternatively, we can think of this via a combinatorics approach as described in the text, where each die can take on 5 possible values (anything but 6).</span></p>
+<ul>
+<li><span class="math inline">\(E^c\)</span> therefore has favorable outcomes of <span class="math inline">\(5^6\)</span>. The probability is then given by dividing by the total number of possible outcomes, <span class="math inline">\(6^6\)</span>. Therefore, <span class="math display">\[P(E) = 1 - (\frac{5^6}{6^6}) = 0.665\]</span></li>
+</ul>
+<p><span style="color: orange;">For 12 dice, we have to add the probability of choosing just one 6 from 12:</span><br>
+<span class="math display">\[P(E) = 1 - \frac{5^{12} + \binom{12}{1}5^{11}}{6^{12}} = 0.62\]</span></p>
+<p><span style="color: orange;">For 18 dice, we have to add the probability of choosing just one 6 and just two 6’s from 18:</span><br>
+<span class="math display">\[P(E) = 1 - \frac{5^{18} + \binom{18}{1}5^{17} + \binom{18}{2}5^{16}}{6^{18}} = 0.60\]</span></p>
+<div class="footer footer-default">
 
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="IntroToProb_Chapter2_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="IntroToProb_Chapter1_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="IntroToProb_Chapter2_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="IntroToProb_Chapter2_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="IntroToProb_Chapter2_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="IntroToProb_Chapter2_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="IntroToProb_Chapter2_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="IntroToProb_Chapter1_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="IntroToProb_Chapter1_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="IntroToProb_Chapter1_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="IntroToProb_Chapter1_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="IntroToProb_Chapter1_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="IntroToProb_Chapter2_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="IntroToProb_Chapter2_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="IntroToProb_Chapter2_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="IntroToProb_Chapter2_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="IntroToProb_Chapter1_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="IntroToProb_Chapter1_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="IntroToProb_Chapter1_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="IntroToProb_Chapter1_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>

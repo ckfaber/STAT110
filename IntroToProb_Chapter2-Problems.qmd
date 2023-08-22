@@ -1,0 +1,7 @@
+---
+title: "IntroToProb_Chapter2-Problems"
+format: revealjs
+editor: source
+---
+
+## Example 2.2.7

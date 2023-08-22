@@ -10,12 +10,83 @@ format:
     scrollable: true
     mouse-wheel: true
     preview-links: auto
-editor: visual
+editor: source
 ---
+
+# Recap
+
+## Inclusion-Exclusion and de Montmort's Problem
+
+![](VennDiagram.svg){fig-align="center"}
+
+$$P(A \cup B) = P(A) + P(B) - P(A \cap B)$$
+To get the probability of the union of two event spaces, you add up the individual probabilities (*inclusion*) then subtract the overlapping spaces that have been double-counted (*exclusions*). 
+
+## What if you have $\ge 3$ subsets? For $n=3$:
+
+<br>
+
+$$\begin{align*}
+P(A \cup B \cup C) &= P(A) + P(B) + P(C)...\\ &- P(A \cap B) - P(B \cap C) - P(A \cap C)...\\ &+ P(A \cap B \cap C)
+\end{align*}$$
+
+For $n$ subsets, the pattern becomes a bit more complicated, but is given by the following formula: 
+
+$$\begin{align*}
+P\left(\bigcup_{i=1}^{n}A_{i}\right) = \sum_{i}P(A_{i}) - \sum_{i<j}P(A_{i} \cap A_{j}) + \sum_{i<j<k}P(A_{i} \cap A_{j} \cap A_{k}) - ...\\
++ (-1)^{n+1}P(A_{1} \cap ... \cap A_{n})
+\end{align*}$$
+
+## [de Montmort's matching problem:]{style="color: orange;"}
+Consider a well-shuffled deck of *n* cards labeled 1 through *n*. If you flip the cards over, one at a time, while saying the flip count 1 through *n* as you do. What is the probability that you get at least one match between the number you say aloud and the card number (e.g., the 3rd card is a 3)? 
+
+<br>
+
+[What type of sampling problem is this?]{style="color: orange;"}\
+
+::: {.incremental}
+- Does the order matter?
+- YES, that's kinda the point of this problem :) So, we're looking at a *permutation*
+- Are we replacing cards as we flip? 
+- NO. 
+
+This is a __permutation without replacement__ problem. The total number of possible permutations is therefore given by $$n!$$
+:::
+
+## Solving de Montmort's problem
+
+[For any *ith* card, what is the probability of a match?]{style="color: orange;"}\
+Let $A_{i}$ be the event of a match. For a fair deck, $$P(A_{i}) = \frac{1}{n}$$
+[What is the probability of two matches?]{style="color: orange;"}\
+Imagine there are only a total of $n=5$ cards. Pick two randomly to match the number that is spoken aloud - for example, say 2 and 4 are in the "correct" position. That means that cards 1, 3, and 5 have $(n-2)$, $(n-3)$, and $(n-4)$ possible values, out of a total possible number of $n!$. In other words...
+
+$$\begin{align*}
+P(A_{i} \cap A_{j}) &= \binom{n}{2} \left(\frac{(n-2)!}{n!}\right)\\
+&= \left(\frac{n!}{(n-2)!2!}\right)\left(\frac{1}{n(n-1)}\right)\\
+&= \left(\frac{n(n-1)(n-2)!}{(n-2)!2!}\right)\left(\frac{1}{n(n-1)}\right)\\
+&= \frac{1}{2!}
+\end{align*}$$
+
+## Solving de Montmort's problem, continued
+[What is the probability of three matches, then???]{style="color: orange;"}\
+
+Well, in our 5-card example, now we are choosing 3 cards to be matches, and the remaining $(n-3)$ and $(n-4)$ can be anything that remains. 
+
+$$\begin{align*}
+P(A_{i} \cap A_{j} \cap A_{k}) &= \binom{n}{3}\left(\frac{(n-3)!}{n!}\right)\\
+&= \left(\frac{n!}{(n-3)!3!}\right)\left(\frac{1}{(n-1)(n-2)}\right)\\
+&= \frac{1}{3!}
+\end{align*}$$
+
+As n increases, we can recognize the pattern emerging, that looks a heck of a lot like the Taylor series for $1/e$: 
+
+$$ P\left(\bigcup_{i=1}^{n}A_{i}\right) = 1 - \frac{1}{2!} + \frac{1}{3!}-...+ (-1)^{n+1}*\frac{1}{n!}$$ 
+
+# Conditional Probability
 
 ## What is Conditional Probability?
 
--   If probability is a measure of uncertainty, conditional probabilty explitly addresses how new data affects our level of uncertainty.
+-   If probability is a measure of uncertainty, conditional probability explicitly addresses how new data affects our level of uncertainty.
 
 <br>
 
@@ -25,17 +96,69 @@ Let *P(R)* indicate the probability of rain before looking outside. If after loo
 
 -   We can denote this new probability as *P(R* \mid C), or the probability of *R* (rain) given *C* (clouds). This is called "conditioning on C."
 
-## *"Conditioning is the soul of statistics."*
+## "Conditioning is the soul of statistics."
 
 <br>
 
-**Conditional Probability, formal definition:**\
+[**Conditional Probability:**]{style="color: orange;"}\
 If *A* and *B* are events with *P(B) \> 0*, then the *conditional probability* of *A* given *B*, denoted by *P(A\|B)*, is defined as:
 
 <br>
 
-<center>$\displaystyle P(A \mid B) = \frac{P(A \cap B)}{P(B)}$</center>
+$$\displaystyle P(A|B) = \frac{P(A \cap B)}{P(B)}$$
+<br>
+
+$$\displaystyle P(B|A) = \frac{P(B \cap A)}{P(A)}$$
 
 <br>
 
-We call $P(A)$ the *prior* probability of *A* and $P (A \mid B)$ the *posterior* probability of *A*.
+[Note that $P(A|B) \neq P(B|A)$.]{style="color: orange;"}\
+
+## $P(A|B) \neq P(B|A)$
+
+[**Example 2.2.2 (pg. 46)**]{style="color: orange;"}\
+Two cards are drawn from a standard deck of cards, one at a time without replacement. Let $A$ be the event that the first card is a heart, and $B$ be the event that the second card is red. Find $P(A|B)$ and $P(B|A)$. 
+
+Because all 4 suits are equally likely, $P(A) = \frac{1}{4}$
+
+After a heart is selected, 51 cards remain, of which 25 are red. Therefore, $P(B) = \frac{25}{51}$
+
+Therefore, $$P(A \cap B) = \frac{1*25}{4*51} = \frac{25}{204}$$
+
+To find the probability that the second card is red, event $B$, we first recognize that the first card could be anything, and *without knowing in advance the value of the first card*, we conclude that the second hard has a 50/50 chance of being red or black. So $$P(B) = \frac{1}{2}$$. 
+
+## So what is $P(A|B)$ and $P(B|A)$? 
+
+<br>
+
+$$P(A|B) = \frac{P(A \cap B)}{P(B)} = \frac{25/204}{1/2} = \frac{25}{102}$$
+<br>
+
+$$P(B|A) = \frac{P(B \cap A)}{P(A)} = \frac{25/204}{1/4} = \frac{25}{51}$$
+<br>
+
+## Intuition of Conditional Probability
+
+<br>
+
+![](ConditionalProbability_PebbleWorld.jpg){fig-align="center"}
+
+## Theorems of Conditional Probability
+
+[1. $P(A \cap B) = P(A|B)*P(B) = P(B|A)*P(A)$]{style="color: orange;"}\
+If A and B are independent, $P(A|B) = P(A)$ because conditioning on $B$ does nothing - $B$ has no effect on $P(A)$. 
+
+[2. Bayes' rule:]{style="color: orange;"} $$P(A|B) = \frac{P(B|A)P(A)}{P(B)}$$
+
+<br>
+
+This is often rewritten in terms of *odds*, as given by: $$P(A) = \frac{odds(A)}{1 + odds(A)}$$
+
+## Law of Total Probability
+[Let $A_{1},...A_{n}$ be a partition sample space *S*, where each $A_{i}$ are disjoint such that their union is *S*.]{style="color: orange;"}\
+
+$$P(B) = \sum_{i=1}^{n}P(B|A_{i})P(A_{i})$$
+<br>
+
+![](LawofTotalProb.jpg){fig-align="center"}
+
